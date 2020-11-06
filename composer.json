@@ -1,6 +1,7 @@
 {
     "name": "nbah1990/laravel-log-extension",
     "description": "Package contains additional log drivers and notification channels",
+    "license": "MIT",
     "authors": [
         {
             "name": "Ivan Karatayev",
