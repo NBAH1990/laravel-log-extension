@@ -25,9 +25,11 @@ class FluentdHandler extends AbstractProcessingHandler
 
     protected function write(array $record): void
     {
-        $message = $record['formatted'];
-        $level = $record['level_name'];
-
-        $this->fluentLogger->post($level, $message);
+        $this->fluentLogger->post(
+            $record['level_name'],
+            [
+                'data' => $record['formatted']
+            ]
+        );
     }
 }
