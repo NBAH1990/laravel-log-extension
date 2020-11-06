@@ -4,10 +4,9 @@
 namespace LaravelLoggerExtension;
 
 
-use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 
-class LaravelLoggerExtensionServiceProvider extends ServiceProvider implements DeferrableProvider
+class LaravelLoggerExtensionServiceProvider extends ServiceProvider
 {
     public function boot()
     {

@@ -11,13 +11,17 @@
     "require": {
         "php": "^7.2",
         "psr/log": "^1.1",
+        "illuminate/support": "^7",
         "monolog/monolog": "^2.1",
         "fluent/logger": "^1.0"
     },
     "autoload": {
         "psr-4": {
             "LaravelLoggerExtension\\": "src/LaravelLoggerExtension"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "require-dev": {
         "roave/security-advisories": "dev-master",
