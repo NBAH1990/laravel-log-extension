@@ -1,24 +1,27 @@
 <?php
 
-use GuzzleHttp\MessageFormatter;
-use Psr\Log\LogLevel;
-
 return [
-    'guzzle_log_integration_enabled' => true,
+    // pass true to enable log of all guzzle requests
+    'guzzle_log_integration_enabled' => false,
 
+    // guzzle client config with additions for logger
     'guzzle_log_integration' => [
-        // add other guzzle client settings here
+        // you can add other guzzle client settings here
 
-        // set your own handler for guzzle client
+        // you can set your own handler for guzzle client
         // 'handler' => new \GuzzleHttp\HandlerStack(),
 
+        // pass channels that should be used to write logs, they should be defined in the 'logging.php' configuration
         'log_channels' => [
-            'daily',
-            'fluentd'
+
         ],
-        'log_formatter' => new MessageFormatter(
+
+        // format of the log message
+        'log_formatter' => new \GuzzleHttp\MessageFormatter(
             '{method}({code}) - {uri} - {req_body} - {res_body} - {req_headers} - {error}'
         ),
-        'log_default_level' => LogLevel::DEBUG
+
+        //by default all responses will be wrote with this level
+        'log_default_level' => \Psr\Log\LogLevel\LogLevel::DEBUG
     ]
 ];
