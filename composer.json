@@ -1,5 +1,5 @@
 {
-    "name": "nbah1990/laravel-log-extension",
+    "name": "nbah1990/laravel-logger-extension",
     "description": "Package contains additional log drivers and notification channels",
     "license": "MIT",
     "authors": [
@@ -13,7 +13,8 @@
         "psr/log": "^1.1",
         "illuminate/support": "^7",
         "monolog/monolog": "^2.1",
-        "fluent/logger": "^1.0"
+        "fluent/logger": "^1.0",
+        "guzzlehttp/guzzle": "^7.0"
     },
     "autoload": {
         "psr-4": {

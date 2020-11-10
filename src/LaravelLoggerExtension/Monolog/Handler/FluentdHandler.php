@@ -7,28 +7,43 @@ use Monolog\Formatter\FluentdFormatter;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger;
 
+/**
+ * Class FluentdHandler
+ * @package LaravelLoggerExtension\Monolog\Handler
+ */
 class FluentdHandler extends AbstractProcessingHandler
 {
+    /**
+     * @var FluentLogger
+     */
     protected $fluentLogger;
 
-    public function __construct($level = Logger::DEBUG, bool $bubble = true)
+    /**
+     * FluentdHandler constructor.
+     * @param string $host
+     * @param string $port
+     * @param int $level
+     * @param bool $bubble
+     */
+    public function __construct(string $host, string $port, $level = Logger::DEBUG, bool $bubble = true)
     {
         parent::__construct($level, $bubble);
 
-        $this->fluentLogger = new FluentLogger(
-            config('laravel-logger-extension.fluentd.host'),
-            config('laravel-logger-extension.fluentd.port')
-        );
+        $this->fluentLogger = new FluentLogger($host, $port);
 
         $this->setFormatter(new FluentdFormatter());
     }
 
+    /**
+     * @param array $record
+     */
     protected function write(array $record): void
     {
         $this->fluentLogger->post(
             $record['level_name'],
             [
-                'data' => $record['formatted']
+                'message' => $record['message'],
+                'context' => $record['context']
             ]
         );
     }
