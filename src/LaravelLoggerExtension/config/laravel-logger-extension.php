@@ -22,6 +22,6 @@ return [
         ),
 
         //by default all responses will be wrote with this level
-        'log_default_level' => \Psr\Log\LogLevel::DEBUG
+        'log_default_level' => Psr\Log\LogLevel::DEBUG
     ]
 ];
