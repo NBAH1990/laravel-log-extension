@@ -8,6 +8,7 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 
 use Illuminate\Support\Facades\Log;
+use Psr\Http\Message\ResponseInterface;
 
 class Client extends \GuzzleHttp\Client
 {
@@ -37,6 +38,13 @@ class Client extends \GuzzleHttp\Client
         $defaultLogLevel = $config['log_default_level'];
 
         $handlerStack = HandlerStack::create();
+
+        $mapResponse = Middleware::mapResponse(function (ResponseInterface $response) {
+            $response->getBody()->rewind();
+            return $response;
+        });
+
+        $handlerStack->push($mapResponse);
 
         foreach ($channels as $channel) {
             $handlerStack->push(Middleware::log(Log::channel($channel), $formatter, $defaultLogLevel));
